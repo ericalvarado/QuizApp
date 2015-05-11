@@ -9,6 +9,7 @@
 import UIKit
 
 class Question: NSObject {
+    //Question class to be used during JSON parse
     var questionText = ""
     var answers = [String]()
     var correctAnswerIndex = 0
