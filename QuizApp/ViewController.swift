@@ -13,6 +13,11 @@ class ViewController: UIViewController {
     let quizModel = QuizModel()
     var questions = [Question]()
     
+    @IBOutlet weak var scrollViewContentView: UIView!
+    @IBOutlet weak var questionText: UILabel!
+    @IBOutlet weak var moduleLessonText: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -15,6 +15,7 @@
 		943478731B002C380022090C /* QuizAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943478721B002C380022090C /* QuizAppTests.swift */; };
 		9434787D1B002E910022090C /* QuizModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9434787C1B002E910022090C /* QuizModel.swift */; };
 		9434787F1B002EB80022090C /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9434787E1B002EB80022090C /* Question.swift */; };
+		94DBCDCC1B01BE3400C3CA5F /* questions.json in Resources */ = {isa = PBXBuildFile; fileRef = 94DBCDCB1B01BE3400C3CA5F /* questions.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		943478721B002C380022090C /* QuizAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizAppTests.swift; sourceTree = "<group>"; };
 		9434787C1B002E910022090C /* QuizModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizModel.swift; path = ../QuizModel.swift; sourceTree = "<group>"; };
 		9434787E1B002EB80022090C /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Question.swift; path = ../Question.swift; sourceTree = "<group>"; };
+		94DBCDCB1B01BE3400C3CA5F /* questions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = questions.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 		9434785A1B002C370022090C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				94DBCDCB1B01BE3400C3CA5F /* questions.json */,
 				9434785B1B002C370022090C /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -199,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				943478621B002C370022090C /* Main.storyboard in Resources */,
+				94DBCDCC1B01BE3400C3CA5F /* questions.json in Resources */,
 				943478671B002C370022090C /* LaunchScreen.xib in Resources */,
 				943478641B002C370022090C /* Images.xcassets in Resources */,
 			);
