@@ -27,6 +27,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="e7P-Gk-nab" secondAttribute="width" id="0sM-7V-oev"/>
                                     <constraint firstItem="e7P-Gk-nab" firstAttribute="top" secondItem="W8w-jA-cK4" secondAttribute="top" id="9Y2-qS-35k"/>
                                     <constraint firstAttribute="trailing" secondItem="e7P-Gk-nab" secondAttribute="trailing" id="C2T-Vo-Mdy"/>
                                     <constraint firstAttribute="bottom" secondItem="e7P-Gk-nab" secondAttribute="bottom" id="rdE-sy-J9B">
@@ -34,17 +35,25 @@
                                     </constraint>
                                     <constraint firstItem="e7P-Gk-nab" firstAttribute="leading" secondItem="W8w-jA-cK4" secondAttribute="leading" id="sc4-Vg-51z"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0sM-7V-oev"/>
+                                    </mask>
+                                </variation>
                                 <variation key="heightClass=compact" ambiguous="YES">
                                     <rect key="frame" x="300" y="0.0" width="300" height="400"/>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="0.0" y="400" width="400" height="400"/>
+                                    <mask key="constraints">
+                                        <include reference="0sM-7V-oev"/>
+                                    </mask>
                                 </variation>
                             </scrollView>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iJd-U5-BNk" userLabel="QuestionView">
                                 <rect key="frame" x="78" y="95" width="8" height="81"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sample Question" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbi-K0-g6W">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sample Question" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbi-K0-g6W">
                                         <rect key="frame" x="0.0" y="0.0" width="173" height="29"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -88,6 +97,9 @@
                                         <include reference="vWQ-c5-QLL"/>
                                         <include reference="vel-hY-gBu"/>
                                     </mask>
+                                </variation>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="300"/>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">

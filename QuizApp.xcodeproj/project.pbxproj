@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		941BE7C51B08196300AB1BB0 /* AnswerButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941BE7C41B08196300AB1BB0 /* AnswerButtonView.swift */; };
 		9434785D1B002C370022090C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9434785C1B002C370022090C /* AppDelegate.swift */; };
 		9434785F1B002C370022090C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9434785E1B002C370022090C /* ViewController.swift */; };
 		943478621B002C370022090C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 943478601B002C370022090C /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		941BE7C41B08196300AB1BB0 /* AnswerButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerButtonView.swift; sourceTree = "<group>"; };
 		943478571B002C370022090C /* QuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9434785B1B002C370022090C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9434785C1B002C370022090C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				943478631B002C370022090C /* Images.xcassets */,
 				943478651B002C370022090C /* LaunchScreen.xib */,
 				9434785A1B002C370022090C /* Supporting Files */,
+				941BE7C41B08196300AB1BB0 /* AnswerButtonView.swift */,
 			);
 			path = QuizApp;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				941BE7C51B08196300AB1BB0 /* AnswerButtonView.swift in Sources */,
 				9434785F1B002C370022090C /* ViewController.swift in Sources */,
 				9434787F1B002EB80022090C /* Question.swift in Sources */,
 				9434787D1B002E910022090C /* QuizModel.swift in Sources */,
