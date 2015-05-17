@@ -34,7 +34,7 @@ class AnswerButtonView: UIView {
         answerLabel.adjustsFontSizeToFitWidth = true
         answerLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 18)
         
-        //Set constraints
+        //Set answerlabel constraints
         let leftMarginConstraint = NSLayoutConstraint(item: answerLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: 20)
         let rightMarginConstraint = NSLayoutConstraint(item: answerLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -20)
         let topMarginConstraint = NSLayoutConstraint(item: answerLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 5)

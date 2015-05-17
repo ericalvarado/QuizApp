@@ -70,6 +70,10 @@ class ViewController: UIViewController {
             // Place it into the content view
             answerViewContentView.addSubview(answer)
             
+            // Add a tap gesture recognizer
+            let tapGesture = UITapGestureRecognizer(target: self, action: Selector("answerTapped:"))
+            answer.addGestureRecognizer(tapGesture)
+            
             // Add constraints to the button depending on which one it is
             var heightConstraint = NSLayoutConstraint(item: answer, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 100)
             answer.addConstraint(heightConstraint)
@@ -92,6 +96,29 @@ class ViewController: UIViewController {
         var scrollHeightConstraint = NSLayoutConstraint(item: answerViewContentView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: CGFloat(101 * answerButtonAnswerArray.count))
 
         answerViewContentView.addConstraint(scrollHeightConstraint)
+    }
+    
+    func answerTapped(gesture:UITapGestureRecognizer){
+        
+        //Get access to the answer button that was tapped -- this is a forced downcast to an optional
+        let answerTapped = gesture.view as! AnswerButtonView?
+        
+        if let actualAnswerTapped = answerTapped {
+            // We got a button, find out which index it was
+            let actualTappedIndex = find(answerButtonAnswerArray,actualAnswerTapped)
+            
+            if let foundTappedIndex = actualTappedIndex {
+                // Compare the answer index that was tapped vs the correct index from question
+                if foundTappedIndex == currentQuestion?.correctAnswerIndex {
+                    println("Correct")
+                } else {
+                    println("Incorrect")
+                }
+                
+            }
+            
+        }
+        
     }
 
 }
