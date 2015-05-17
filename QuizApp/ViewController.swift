@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     var questions = [Question]()
     
     @IBOutlet weak var questionView: UIView!
-    @IBOutlet weak var scrollViewContentView: UIView!
+    @IBOutlet weak var answerViewContentView: UIView!
     @IBOutlet weak var questionText: UILabel!
     @IBOutlet weak var moduleLessonText: UILabel!
     
