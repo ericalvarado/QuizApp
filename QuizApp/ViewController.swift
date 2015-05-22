@@ -20,6 +20,14 @@ class ViewController: UIViewController {
     var currentQuestion = Question?()
     var answerButtonAnswerArray = [AnswerButtonView]()
     
+    //Result View Properties
+    @IBOutlet weak var resultTitleLabel: UILabel!
+    @IBOutlet weak var feedBackLabel: UILabel!
+    @IBOutlet weak var nextButtonLabel: UIView!
+    @IBOutlet weak var resultView: UIView!
+    @IBOutlet weak var dimView: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +50,13 @@ class ViewController: UIViewController {
     }
     
     func displayCurrentQuestion(){
+        // Set Alpha for Feedback Elements to 0
+        resultTitleLabel.alpha = 0
+        feedBackLabel.alpha = 0
+        nextButtonLabel.alpha = 0
+        resultView.alpha = 0
+        dimView.alpha = 0
+        
         //Confirm that there is question text
         
         if currentQuestion?.questionText != nil {
@@ -108,18 +123,40 @@ class ViewController: UIViewController {
             let actualTappedIndex = find(answerButtonAnswerArray,actualAnswerTapped)
             
             if let foundTappedIndex = actualTappedIndex {
+                
+                // Set Alpha for Feedback Elements to 1
+                resultTitleLabel.alpha = 1
+                feedBackLabel.alpha = 1
+                nextButtonLabel.alpha = 1
+                resultView.alpha = 1
+                dimView.alpha = 1
+                
                 // Compare the answer index that was tapped vs the correct index from question
                 if foundTappedIndex == currentQuestion?.correctAnswerIndex {
-                    println("Correct")
+                    resultTitleLabel.text = "Correct"
+                    
                 } else {
-                    println("Incorrect")
+                    resultTitleLabel.text = "Incorrect"
                 }
                 
+                // Display feedback
+                feedBackLabel.text = currentQuestion?.feedback
             }
             
         }
         
     }
 
+    @IBAction func nextQuestion(sender: UIButton) {
+        // Find index of current question
+        if let currentQuestionIndex = find(questions,currentQuestion!) {
+            var nextQuestionIndex = currentQuestionIndex + 1
+            if nextQuestionIndex < questions.count {
+                println("Next question is \(nextQuestionIndex)")
+            } else {
+                println("Quiz is over")
+            }
+        }
+    }
 }
 
