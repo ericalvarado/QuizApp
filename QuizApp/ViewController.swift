@@ -148,12 +148,38 @@ class ViewController: UIViewController {
     }
 
     @IBAction func nextQuestion(sender: UIButton) {
-        // Find index of current question
+        
+        // Dismiss dim and result views
+        dimView.alpha = 0
+        resultView.alpha = 0
+        
+        // Erase the question and module labels
+        questionText.text = ""
+        moduleLessonText.text = ""
+        
+        // Remove all the answerbuttonviews
+        for button in answerButtonAnswerArray {
+            button.removeFromSuperview()
+        }
+        
+        // Flush button array
+        answerButtonAnswerArray.removeAll(keepCapacity: false)
+        
+        
+        // Find and check index of current question
         if let currentQuestionIndex = find(questions,currentQuestion!) {
-            var nextQuestionIndex = currentQuestionIndex + 1
+            
+            // Found the index
+            let nextQuestionIndex = currentQuestionIndex + 1
             if nextQuestionIndex < questions.count {
-                println("Next question is \(nextQuestionIndex)")
+                // The next question index is within bounds
+                
+                // Set current question to next question and display thequestion
+                currentQuestion = questions[nextQuestionIndex]
+                displayCurrentQuestion()
+                
             } else {
+                // The next question index is outside of bounds, therefore quiz is done.
                 println("Quiz is over")
             }
         }
