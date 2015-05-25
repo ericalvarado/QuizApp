@@ -20,13 +20,15 @@ class ViewController: UIViewController {
     var currentQuestion = Question?()
     var answerButtonAnswerArray = [AnswerButtonView]()
     
-    //Result View Properties
+    // Result View Properties
     @IBOutlet weak var resultTitleLabel: UILabel!
     @IBOutlet weak var feedBackLabel: UILabel!
-    @IBOutlet weak var nextButtonLabel: UIView!
+    @IBOutlet weak var nextButtonLabel: UIButton!
     @IBOutlet weak var resultView: UIView!
     @IBOutlet weak var dimView: UIView!
     
+    // Score Properties
+    var score = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,7 +110,8 @@ class ViewController: UIViewController {
         }
         
         // Adjust the height of the scroll view if needed
-        var scrollHeightConstraint = NSLayoutConstraint(item: answerViewContentView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: CGFloat(101 * answerButtonAnswerArray.count))
+        // Add to add one to the count otherwise the height is not high enough due to counting error
+        var scrollHeightConstraint = NSLayoutConstraint(item: answerViewContentView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: CGFloat(101 * (answerButtonAnswerArray.count+1)))
 
         answerViewContentView.addConstraint(scrollHeightConstraint)
     }
@@ -124,6 +127,9 @@ class ViewController: UIViewController {
             
             if let foundTappedIndex = actualTappedIndex {
                 
+                //Set the button label to Next Question
+                nextButtonLabel.setTitle("Next Question", forState: UIControlState.Normal)
+                
                 // Set Alpha for Feedback Elements to 1
                 resultTitleLabel.alpha = 1
                 feedBackLabel.alpha = 1
@@ -134,6 +140,7 @@ class ViewController: UIViewController {
                 // Compare the answer index that was tapped vs the correct index from question
                 if foundTappedIndex == currentQuestion?.correctAnswerIndex {
                     resultTitleLabel.text = "Correct"
+                    score++
                     
                 } else {
                     resultTitleLabel.text = "Incorrect"
@@ -148,6 +155,15 @@ class ViewController: UIViewController {
     }
 
     @IBAction func nextQuestion(sender: UIButton) {
+        
+        // Check to see if the quiz is finished
+        if nextButtonLabel.currentTitle == "Restart Quiz" && questions.count > 0 {
+            // Set the current question to first question
+            currentQuestion = questions[0]
+            score = 0
+            displayCurrentQuestion()
+            return
+        }
         
         // Dismiss dim and result views
         dimView.alpha = 0
@@ -180,7 +196,16 @@ class ViewController: UIViewController {
                 
             } else {
                 // The next question index is outside of bounds, therefore quiz is done.
-                println("Quiz is over")
+                resultTitleLabel.text = "Quiz Finished"
+                feedBackLabel.text = String(format: "Your score is %d of %d", score,questions.count)
+                nextButtonLabel.setTitle("Restart Quiz", forState: UIControlState.Normal)
+                
+                // Set Alpha for Feedback Elements to 1
+                resultTitleLabel.alpha = 1
+                feedBackLabel.alpha = 1
+                nextButtonLabel.alpha = 1
+                resultView.alpha = 1
+                dimView.alpha = 1
             }
         }
     }

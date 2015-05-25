@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -18,8 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="questionbg" translatesAutoresizingMaskIntoConstraints="NO" id="Ak6-ou-AbD">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W8w-jA-cK4">
-                                <rect key="frame" x="0.0" y="0.0" width="94" height="55"/>
+                                <rect key="frame" x="0.0" y="0.0" width="20" height="5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e7P-Gk-nab" userLabel="AnswerContentView">
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -51,16 +54,16 @@
                                 </variation>
                             </scrollView>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iJd-U5-BNk" userLabel="QuestionView">
-                                <rect key="frame" x="85" y="32" width="91" height="57"/>
+                                <rect key="frame" x="-52" y="70" width="53" height="14"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sample Question" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbi-K0-g6W">
-                                        <rect key="frame" x="0.0" y="0.0" width="173" height="29"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="173" height="28.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Module 1 | Lesson 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JxI-lt-Kcz">
-                                        <rect key="frame" x="0.0" y="0.0" width="155" height="22"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="154.5" height="21.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -170,6 +173,7 @@
                         <constraints>
                             <constraint firstItem="W8w-jA-cK4" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" multiplier="0.5" id="2Wl-Zi-iHd"/>
                             <constraint firstItem="Kot-Kv-gLD" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="2hh-4k-qjW"/>
+                            <constraint firstItem="Ak6-ou-AbD" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="7FX-q2-axQ"/>
                             <constraint firstItem="iJd-U5-BNk" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="height" multiplier="0.5" id="BpS-cO-WXi"/>
                             <constraint firstItem="Kot-Kv-gLD" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="FPW-8K-IVw"/>
                             <constraint firstItem="iJd-U5-BNk" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" multiplier="0.5" id="Gua-E5-OsC"/>
@@ -180,6 +184,7 @@
                             <constraint firstItem="iJd-U5-BNk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Mfe-Jp-FCC"/>
                             <constraint firstItem="iJd-U5-BNk" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="NR8-tj-CYR"/>
                             <constraint firstItem="W8w-jA-cK4" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="OeE-aj-P9b"/>
+                            <constraint firstAttribute="bottom" secondItem="Ak6-ou-AbD" secondAttribute="bottom" id="T0o-Ee-XI8"/>
                             <constraint firstAttribute="trailing" secondItem="iJd-U5-BNk" secondAttribute="trailing" id="UvI-Sy-9mI"/>
                             <constraint firstItem="ec2-6M-fqa" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="10" id="X9w-5b-hSg"/>
                             <constraint firstItem="W8w-jA-cK4" firstAttribute="bottom" secondItem="kh9-bI-dsS" secondAttribute="bottom" id="Yr9-RD-L8F"/>
@@ -192,7 +197,9 @@
                             <constraint firstAttribute="bottom" secondItem="W8w-jA-cK4" secondAttribute="bottom" id="hMe-8r-65D"/>
                             <constraint firstAttribute="bottom" secondItem="Kot-Kv-gLD" secondAttribute="bottom" id="lSc-WB-0hX"/>
                             <constraint firstItem="W8w-jA-cK4" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="height" multiplier="0.5" id="rz6-n3-e13"/>
+                            <constraint firstItem="Ak6-ou-AbD" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="sw6-3X-acB"/>
                             <constraint firstItem="iJd-U5-BNk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="trO-Lu-ztJ"/>
+                            <constraint firstAttribute="trailing" secondItem="Ak6-ou-AbD" secondAttribute="trailing" id="ue8-v3-cLr"/>
                             <constraint firstAttribute="trailing" secondItem="W8w-jA-cK4" secondAttribute="trailing" id="wW9-uu-dDf"/>
                         </constraints>
                         <variation key="default">
@@ -257,4 +264,7 @@
             <point key="canvasLocation" x="393" y="745"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="questionbg" width="320" height="568"/>
+    </resources>
 </document>
