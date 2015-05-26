@@ -36,6 +36,11 @@ class ViewController: UIViewController {
     let correctColor = UIColor(red: 43/255, green: 75/255, blue: 26/255, alpha: 0.8)
     let wrongColor = UIColor(red: 133/255, green: 31/255, blue: 23/255, alpha: 0.8)
     let endColor = UIColor(red: 44/255, green: 49/255, blue: 47/255, alpha: 0.8)
+    let nextButtonColorCorrect = UIColor(red: 41/255, green: 85/255, blue: 38/255, alpha: 1)
+    let nextButtonColorWrong = UIColor(red: 129/255, green: 11/255, blue: 13/255, alpha: 1)
+    
+    // Constraint Properties
+    @IBOutlet weak var verticalSpaceResultViewToView: NSLayoutConstraint!
     
     // Methods
     
@@ -68,6 +73,10 @@ class ViewController: UIViewController {
         resultView.alpha = 0
         dimView.alpha = 0
         
+        // Set question and module alpha to 0
+        questionText.alpha = 0
+        moduleLessonText.alpha = 0
+        
         //Confirm that there is question text
         
         if currentQuestion?.questionText != nil {
@@ -77,6 +86,13 @@ class ViewController: UIViewController {
             
             // Update the module and lesson text
             moduleLessonText.text = "Module \(currentQuestion!.module) | Lesson \(currentQuestion!.lesson)"
+            
+            // Animate appearance of question and module
+            UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+                // Set question and module alpha to 1
+                self.questionText.alpha = 1
+                self.moduleLessonText.alpha = 1
+            }, completion: nil)
             
             // Create and display the answer button views
             createAnswerButton()
@@ -104,8 +120,8 @@ class ViewController: UIViewController {
             var heightConstraint = NSLayoutConstraint(item: answer, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 99)
             answer.addConstraint(heightConstraint)
             
-            var leftConstraint = NSLayoutConstraint(item: answer, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: answerViewContentView, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: 0)
-            var rightConstraint = NSLayoutConstraint(item: answer, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: answerViewContentView, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 0)
+            var leftConstraint = NSLayoutConstraint(item: answer, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: answerViewContentView, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: 400)
+            var rightConstraint = NSLayoutConstraint(item: answer, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: answerViewContentView, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 400)
             var topConstraint = NSLayoutConstraint(item: answer, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: answerViewContentView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: CGFloat(100*index))
             
             answerViewContentView.addConstraints([leftConstraint,rightConstraint,topConstraint])
@@ -118,6 +134,19 @@ class ViewController: UIViewController {
             
             // Add it to the button array
             answerButtonAnswerArray.append(answer)
+            
+            // Animate the button left and right constraints of the answer buttons
+            view.layoutIfNeeded()
+            
+            // Stagger the delay times
+            var delayTime = Double(index) * 0.1
+        
+            // Animate the answer buttons with a staggered entrance
+            UIView.animateWithDuration(1, delay: delayTime, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+                leftConstraint.constant = 0
+                rightConstraint.constant = 0
+                self.view.layoutIfNeeded()
+            }, completion: nil)
             
         }
         
@@ -142,22 +171,35 @@ class ViewController: UIViewController {
                 //Set the button label to Next Question
                 nextButtonLabel.setTitle("Next Question", forState: UIControlState.Normal)
                 
-                // Set Alpha for Feedback Elements to 1
-                resultTitleLabel.alpha = 1
-                feedBackLabel.alpha = 1
-                nextButtonLabel.alpha = 1
-                resultView.alpha = 1
-                dimView.alpha = 1
+                // Set result view vertical space real high
+                verticalSpaceResultViewToView.constant = 900
+                
+                // Update the view
+                view.layoutIfNeeded()
+                
+                UIView.animateWithDuration(0.5, animations: {
+                    self.verticalSpaceResultViewToView.constant = 30
+                    self.view.layoutIfNeeded()
+                    
+                    // Set Alpha for Feedback Elements to 1
+                    self.resultTitleLabel.alpha = 1
+                    self.feedBackLabel.alpha = 1
+                    self.nextButtonLabel.alpha = 1
+                    self.resultView.alpha = 1
+                    self.dimView.alpha = 1
+                })
                 
                 // Compare the answer index that was tapped vs the correct index from question
                 if foundTappedIndex == currentQuestion?.correctAnswerIndex {
                     resultTitleLabel.text = "Correct"
                     resultView.backgroundColor = correctColor
+                    nextButtonLabel.backgroundColor = nextButtonColorCorrect
                     score++
                     
                 } else {
                     resultTitleLabel.text = "Incorrect"
                     resultView.backgroundColor = wrongColor
+                    nextButtonLabel.backgroundColor = nextButtonColorWrong
                 }
                 
                 // Display feedback

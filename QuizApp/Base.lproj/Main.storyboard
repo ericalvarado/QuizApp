@@ -143,7 +143,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MoH-xL-qKT">
                                         <rect key="frame" x="0.0" y="530" width="580" height="40"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.50676688762626254" green="0.042423734860981846" blue="0.050095589611652939" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="6bJ-qi-SE3"/>
                                         </constraints>
@@ -263,6 +263,7 @@
                         <outlet property="questionView" destination="iJd-U5-BNk" id="lFU-iX-3Kt"/>
                         <outlet property="resultTitleLabel" destination="yrO-li-pP1" id="1ll-am-iGy"/>
                         <outlet property="resultView" destination="ec2-6M-fqa" id="qxY-cS-9aJ"/>
+                        <outlet property="verticalSpaceResultViewToView" destination="gLp-g7-72c" id="4m3-tQ-ggw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
