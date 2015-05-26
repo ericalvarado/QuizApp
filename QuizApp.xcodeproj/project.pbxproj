@@ -85,6 +85,7 @@
 		943478591B002C370022090C /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
+				941BE7C41B08196300AB1BB0 /* AnswerButtonView.swift */,
 				9434787E1B002EB80022090C /* Question.swift */,
 				9434787C1B002E910022090C /* QuizModel.swift */,
 				9434785C1B002C370022090C /* AppDelegate.swift */,
@@ -93,7 +94,6 @@
 				943478631B002C370022090C /* Images.xcassets */,
 				943478651B002C370022090C /* LaunchScreen.xib */,
 				9434785A1B002C370022090C /* Supporting Files */,
-				941BE7C41B08196300AB1BB0 /* AnswerButtonView.swift */,
 			);
 			path = QuizApp;
 			sourceTree = "<group>";

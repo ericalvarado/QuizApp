@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
    
+    // Properties
+    
     @IBOutlet weak var questionView: UIView!
     @IBOutlet weak var answerViewContentView: UIView!
     @IBOutlet weak var questionText: UILabel!
@@ -29,6 +31,13 @@ class ViewController: UIViewController {
     
     // Score Properties
     var score = 0
+    
+    // Set background color for correct and incorrect answers
+    let correctColor = UIColor(red: 43/255, green: 75/255, blue: 26/255, alpha: 0.8)
+    let wrongColor = UIColor(red: 133/255, green: 31/255, blue: 23/255, alpha: 0.8)
+    let endColor = UIColor(red: 44/255, green: 49/255, blue: 47/255, alpha: 0.8)
+    
+    // Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,7 +101,7 @@ class ViewController: UIViewController {
             answer.addGestureRecognizer(tapGesture)
             
             // Add constraints to the button depending on which one it is
-            var heightConstraint = NSLayoutConstraint(item: answer, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 100)
+            var heightConstraint = NSLayoutConstraint(item: answer, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 99)
             answer.addConstraint(heightConstraint)
             
             var leftConstraint = NSLayoutConstraint(item: answer, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: answerViewContentView, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: 0)
@@ -103,6 +112,9 @@ class ViewController: UIViewController {
             
             // Set the answer text for it
             answer.setAnswerText(currentQuestion!.answers[index])
+            
+            // Set the answer number text
+            answer.setAnswerNumber(index+1)
             
             // Add it to the button array
             answerButtonAnswerArray.append(answer)
@@ -140,10 +152,12 @@ class ViewController: UIViewController {
                 // Compare the answer index that was tapped vs the correct index from question
                 if foundTappedIndex == currentQuestion?.correctAnswerIndex {
                     resultTitleLabel.text = "Correct"
+                    resultView.backgroundColor = correctColor
                     score++
                     
                 } else {
                     resultTitleLabel.text = "Incorrect"
+                    resultView.backgroundColor = wrongColor
                 }
                 
                 // Display feedback
@@ -197,8 +211,10 @@ class ViewController: UIViewController {
             } else {
                 // The next question index is outside of bounds, therefore quiz is done.
                 resultTitleLabel.text = "Quiz Finished"
+                resultView.backgroundColor = endColor
                 feedBackLabel.text = String(format: "Your score is %d of %d", score,questions.count)
                 nextButtonLabel.setTitle("Restart Quiz", forState: UIControlState.Normal)
+                nextButtonLabel.backgroundColor = UIColor.darkGrayColor()
                 
                 // Set Alpha for Feedback Elements to 1
                 resultTitleLabel.alpha = 1
