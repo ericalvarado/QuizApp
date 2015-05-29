@@ -16,18 +16,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var answerViewContentView: UIView!
     @IBOutlet weak var questionText: UILabel!
     @IBOutlet weak var moduleLessonText: UILabel!
-
-    let quizModel = QuizModel()
-    var questions = [Question]()
-    var currentQuestion = Question?()
-    var answerButtonAnswerArray = [AnswerButtonView]()
-    
-    // Result View Properties
     @IBOutlet weak var resultTitleLabel: UILabel!
     @IBOutlet weak var feedBackLabel: UILabel!
     @IBOutlet weak var nextButtonLabel: UIButton!
     @IBOutlet weak var resultView: UIView!
     @IBOutlet weak var dimView: UIView!
+
+    let quizModel = QuizModel()
+    var questions = [Question]()
+    var currentQuestion = Question?()
+    var answerButtonAnswerArray = [AnswerButtonView]()
     
     // Score Properties
     var score = 0
@@ -42,6 +40,9 @@ class ViewController: UIViewController {
     // Constraint Properties
     @IBOutlet weak var verticalSpaceResultViewToView: NSLayoutConstraint!
     
+    // User Defaults Properties
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+    
     // Methods
     
     override func viewDidLoad() {
@@ -50,10 +51,16 @@ class ViewController: UIViewController {
         // Get the questions from the quiz model
         questions = quizModel.getQuestions()
         
+        // Initialize the view to hide resultview and dimview
+        removeFeedbackViews()
+        
         // Check to see if there is at least one question
         if (questions.count > 0){
             // Set the current question to the first question
             currentQuestion = questions[0]
+            
+            // Load user's state
+            loadState()
             
             // Call the display question method
             displayCurrentQuestion()
@@ -66,19 +73,8 @@ class ViewController: UIViewController {
     }
     
     func displayCurrentQuestion(){
-        // Set Alpha for Feedback Elements to 0
-        resultTitleLabel.alpha = 0
-        feedBackLabel.alpha = 0
-        nextButtonLabel.alpha = 0
-        resultView.alpha = 0
-        dimView.alpha = 0
-        
-        // Set question and module alpha to 0
-        questionText.alpha = 0
-        moduleLessonText.alpha = 0
         
         //Confirm that there is question text
-        
         if currentQuestion?.questionText != nil {
 
             // Update the question text
@@ -97,6 +93,10 @@ class ViewController: UIViewController {
             // Create and display the answer button views
             createAnswerButton()
         }
+        
+        // Save user's state
+        saveState()
+
     }
     
     func createAnswerButton(){
@@ -177,6 +177,7 @@ class ViewController: UIViewController {
                 // Update the view
                 view.layoutIfNeeded()
                 
+                // Animate alpha
                 UIView.animateWithDuration(0.5, animations: {
                     self.verticalSpaceResultViewToView.constant = 30
                     self.view.layoutIfNeeded()
@@ -204,8 +205,10 @@ class ViewController: UIViewController {
                 
                 // Display feedback
                 feedBackLabel.text = currentQuestion?.feedback
+                
+                // Save user's state
+                saveState()
             }
-            
         }
         
     }
@@ -217,7 +220,9 @@ class ViewController: UIViewController {
             // Set the current question to first question
             currentQuestion = questions[0]
             score = 0
+            removeFeedbackViews()
             displayCurrentQuestion()
+            clearState()
             return
         }
         
@@ -248,6 +253,10 @@ class ViewController: UIViewController {
                 
                 // Set current question to next question and display thequestion
                 currentQuestion = questions[nextQuestionIndex]
+                
+                removeFeedbackViews()
+                
+                // Display next question
                 displayCurrentQuestion()
                 
             } else {
@@ -258,14 +267,106 @@ class ViewController: UIViewController {
                 nextButtonLabel.setTitle("Restart Quiz", forState: UIControlState.Normal)
                 nextButtonLabel.backgroundColor = UIColor.darkGrayColor()
                 
-                // Set Alpha for Feedback Elements to 1
-                resultTitleLabel.alpha = 1
-                feedBackLabel.alpha = 1
-                nextButtonLabel.alpha = 1
-                resultView.alpha = 1
-                dimView.alpha = 1
+                displayFeedbackViews()
             }
         }
+        
+        // Save user's state
+        saveState()
+    }
+    
+    func clearState(){
+        // Clear user's state - score
+        userDefaults.setInteger(0, forKey: "score")
+        
+        // Clear user's state - current question
+        userDefaults.setInteger(0, forKey: "currentquestion")
+        
+        // Clear user's state - result view
+        userDefaults.setBool(false, forKey: "resultview")
+        
+        // Clear user's state - result title label
+        userDefaults.setObject("", forKey: "resulttitleLabel")
+        
+        // Clear user's state to disk
+        userDefaults.synchronize()
+    }
+    
+    func saveState(){
+        
+        // Save user's state - score
+        userDefaults.setInteger(score, forKey: "score")
+        
+        // Save user's state - current question
+        if let indexCurrentQuestion = find(questions,currentQuestion!){
+            userDefaults.setInteger(indexCurrentQuestion, forKey: "currentquestion")
+        }
+        
+        // Save user's state - result view
+        userDefaults.setBool(resultView.alpha == 1, forKey: "resultviewalpha")
+        
+        // Save user's state - result title label
+        userDefaults.setObject(resultTitleLabel.text, forKey: "resulttitleLabel")
+        
+        // Save user's state to disk
+        userDefaults.synchronize()
+        
+        
+    }
+    
+    func loadState(){
+        
+        // Load user's state - score
+        let savedScore = userDefaults.integerForKey("score")
+        score = savedScore
+        
+        // Load user's state - current question
+        let savedCurrentQuestionIndex = userDefaults.integerForKey("currentquestion")
+        
+        if savedCurrentQuestionIndex < questions.count {
+            currentQuestion = questions[savedCurrentQuestionIndex]
+        }
+        
+        // Load user's state - result view
+        let savedResultView = userDefaults.boolForKey("resultviewalpha")
+        
+        if savedResultView == true {
+            displayFeedbackViews()
+            
+            // Load user's state - result title label - AnyObject that is force casted to optional string
+            let savedResultTitleLabel = userDefaults.objectForKey("resulttitleLabel") as! String?
+            
+            // Optional binding check
+            if let actualSavedResultTitleLabel = savedResultTitleLabel {
+                resultTitleLabel.text = actualSavedResultTitleLabel
+                
+                // Set result review color based on loaded result title label
+                if resultTitleLabel.text == "Correct" {
+                    resultView.backgroundColor = correctColor
+                    nextButtonLabel.backgroundColor = nextButtonColorCorrect
+                } else {
+                    resultView.backgroundColor = wrongColor
+                    nextButtonLabel.backgroundColor = nextButtonColorWrong
+                }
+                
+            }
+            
+        }
+    }
+    
+    func displayFeedbackViews(){
+        
+        // Reveal result and dim views
+        resultView.alpha = 1
+        dimView.alpha = 1
+        
+    }
+    
+    func removeFeedbackViews(){
+        
+        // Hide result and dim views
+        resultView.alpha = 0
+        dimView.alpha = 0
     }
 }
 
