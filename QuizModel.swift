@@ -14,7 +14,8 @@ class QuizModel: NSObject {
         var questions = [Question]()
         
         //Get JSON file
-        var jsonObjects = getLocalJsonFile()
+        //var jsonObjects = getLocalJsonFile()
+        var jsonObjects = getRemoteJsonFile()
         
         //TODO: Parse JSON file
         for var index = 0; index < jsonObjects.count; index++ {
@@ -27,7 +28,7 @@ class QuizModel: NSObject {
             
             //Assign value to key value pair; not the objects are "AnyObject" and need to be forced downcasted with as!
             q.questionText = jsonDictionary["question"] as! String
-            q.answers = jsonDictionary["answer"] as! [String]
+            q.answers = jsonDictionary["answers"] as! [String]
             q.correctAnswerIndex = jsonDictionary["correctIndex"] as! Int
             q.module = jsonDictionary["module"] as! Int
             q.lesson = jsonDictionary["lesson"] as! Int
@@ -39,6 +40,36 @@ class QuizModel: NSObject {
         
         //Return list of question objects
         return questions
+    }
+    
+    func getRemoteJsonFile()->[NSDictionary]{
+        // This is using Synchronous Downloading and could be prohibitive if data set is large!
+        
+        // Create a new URL
+        let remoteURL = NSURL(string: "http://codewithchris.com/code/QuestionData.json")
+        
+        // Optional bind
+        
+        if let remoteURL = remoteURL {
+            
+            // Try to download data
+            let jsonData = NSData(contentsOfURL: remoteURL)
+            
+            //Using check if nil as an alternative to serialize the data
+            if jsonData != nil {
+                
+                //Serialize the data
+                let arrayOfDictionaries = NSJSONSerialization.JSONObjectWithData(jsonData!, options: NSJSONReadingOptions.MutableContainers, error: nil) as! [NSDictionary]?
+                
+                if let actualArrayOfDictionaries = arrayOfDictionaries {
+                    return actualArrayOfDictionaries
+                }
+            }
+            
+        }
+        
+        //Return empty array of dictionary if no data
+        return [NSDictionary]()
     }
     
     func getLocalJsonFile()->[NSDictionary]{

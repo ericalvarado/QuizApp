@@ -1,7 +1,7 @@
 [
 	{
 		"question":"If you want to create a custom class which can be displayed on the view, you can subclass UIView.",
-		"answer":["True","False"],
+		"answers":["True","False"],
 		"correctIndex":0,
 		"module":3,
 		"lesson":0,
@@ -9,7 +9,7 @@
 	},
 	{
 		"question":"When you want to create a new class in your Swift project, which type of new file do you select?",
-		"answer":["Cocoa Touch Class","Objective-C File","Swift File"],
+		"answers":["Cocoa Touch Class","Objective-C File","Swift File"],
 		"correctIndex":2,
 		"module":3,
 		"lesson":0,
@@ -17,7 +17,7 @@
 	},
 	{
 		"question":"When you want to create a custom class that has no view, you can subclass NSObject.",
-		"answer":["True","False"],
+		"answers":["True","False"],
 		"correctIndex":0,
 		"module":3,
 		"lesson":0,
@@ -25,7 +25,7 @@
 	},
 	{
 		"question":"This is the syntax for a subclass: “class MySubclass -> UIView”",
-		"answer":["True","False"],
+		"answers":["True","False"],
 		"correctIndex":1,
 		"module":3,
 		"lesson":0,
